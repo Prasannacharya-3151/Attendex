@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button.tsx";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Button } from "./ui/button";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import {GraduationCap, Users, Shield, ArrowRight } from "lucide-react";
 
 const LandingPage: React.FC = () => {
@@ -22,7 +22,7 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-50">
       <div className="w-full max-w-4xl">
         
         <div className="text-center mb-12">
@@ -51,7 +51,7 @@ const LandingPage: React.FC = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full hover:bg-sky-100">
                 Student Login
               </Button>
             </CardContent>
@@ -72,7 +72,7 @@ const LandingPage: React.FC = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full hover:bg-sky-100">
                 Faculty Login
               </Button>
             </CardContent>
@@ -93,7 +93,7 @@ const LandingPage: React.FC = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full hover:bg-sky-100">
                 Admin Login
               </Button>
             </CardContent>
@@ -102,7 +102,7 @@ const LandingPage: React.FC = () => {
 
        
         <div className="text-center">
-          <Button onClick={handleGetStarted} size="lg" className="px-8">
+          <Button onClick={handleGetStarted} size="lg" className="px-8 hover:bg-sky-600">
             Get Started
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
