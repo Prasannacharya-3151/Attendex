@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent, } from "../ui/card";
+import { Card, CardHeader,  CardTitle,  CardDescription, CardContent, } from "../ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ArrowLeft } from "lucide-react";
 
@@ -53,7 +55,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="usn">USN</Label>
-                        <input
+                        <Input
                         id="usn"
                         type="text"
                         placeholder="Enter your USN"
@@ -65,7 +67,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
 
                     <div className="space-y-2">
                         <Label htmlFor="name">Full Name</Label>
-                        <input
+                        <Input
                         id="name"
                         type="text"
                         placeholder="Enter your full name"
@@ -77,7 +79,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
                     
                     <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
-                        <input
+                        <Input
                         id="email"
                         type="email"
                         placeholder="Enter your email"
@@ -87,8 +89,57 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
                         />
                     </div>
 
+                    <div className="space-y-2">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                        id="password"
+                        type="password"
+                        placeholder="enter your password"
+                        value={formData.password}
+                        onChange={(e) => setFromData({...formData, password: e.target.value})}
+                        required
+                        />
+                    </div>
 
-                    
+                    <div className="space-y-2">
+                        <Label htmlFor="branch">Branch</Label>
+                        <Select value={formData.branch} onValueChange={(value) => setFromData({...formData, branch:value})}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="select your branch" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="Computer Science">Computer Science</SelectItem>
+                                <SelectItem value="Information Technology">Information Technology</SelectItem>
+                                <SelectItem value="Electronics and Communication">Electronics and Communication</SelectItem>
+                                <SelectItem value="Electrical and Electronics">Electrical and Electronics</SelectItem>
+                                <SelectItem value="Mechanical">Mechanical</SelectItem>
+                                <SelectItem value="Civil">Civil</SelectItem>
+                                <SelectItem value="Chemical">Chemical</SelectItem>
+                                <SelectItem value="Aerospace">Aerospace</SelectItem>
+                                <SelectItem value="AIML">AIML</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="year">Year</Label>
+                        <Select value={formData.year} onValueChange={(value) => setFromData({...formData, year:value})}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="select your year" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="1st Year">1st Year</SelectItem>
+                                <SelectItem value="2nd Year">2nd Year</SelectItem>
+                                <SelectItem value="3rd Year">3rd Year</SelectItem>
+                                <SelectItem value="4th Year">4th Year</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <Button type="submit" className="w-full">
+                        Create Student Account
+                    </Button>
+
                 </form>
             </CardContent>
            </Card> 
