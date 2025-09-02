@@ -9,7 +9,7 @@ function App(){
     <BrowserRouter>
    
       <Routes>
-        <LandingPage />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/studentsignup" element={<StudentSignup onBack={() => {}} onSignup={() => {}} />} />
       </Routes>
 
