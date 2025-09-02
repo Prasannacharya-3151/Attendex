@@ -136,7 +136,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
                         </Select>
                     </div>
 
-                    <Button type="submit" className="w-full">
+                    <Button type="submit" className="w-full hover:bg-sky-600">
                         Create Student Account
                     </Button>
 
