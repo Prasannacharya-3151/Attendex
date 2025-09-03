@@ -103,7 +103,7 @@ const AdminSignup = ({onBack, onSignup }: AdminSignupProps) => {
 
 
                         <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                            <p className="text-sm text-amber-800">
+                            <p className="text-sm text-amber-700">
                                 <strong>Note:</strong> Admin accounts require approval and are typically restricted to HOD creation only.
                             </p>
                         </div>
