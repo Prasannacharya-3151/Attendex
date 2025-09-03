@@ -16,7 +16,7 @@ function App(){
         <Route path="/studentsignup" element={<StudentSignup onSignup={() => {}} />} />
         <Route path="/facultysignup" element={<FacultySignup onBack={() => {}} onSignup={() => {}} />} />
         <Route path="/adminsignup" element={<AdminSignup onSignup={() => {}} /> } />
-        <Route path="/loginform" element={<LoginForm onLogin={()=> {}} selectedRule={()=>{}}/>} />
+        <Route path="/loginform" element={<LoginForm onLogin={()=> {}} />} />
       </Routes>
 
     </BrowserRouter>

@@ -42,7 +42,7 @@ const StudentSignup = ({onSignup}: StudentSignupProps) => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-100">
            <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
                 <Button variant="ghost" onClick={()=>navigate("/")} className="w-fit p-3 rounded-full hover:bg-sky-100">

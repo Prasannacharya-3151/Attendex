@@ -27,21 +27,21 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
     }
   };
 
-  const roleIcons = {
-    student: GraduationCap,
-    faculty: Users,
-    hod: UserCheck,
-  };
+//   const roleIcons = {
+//     student: GraduationCap,
+//     faculty: Users,
+//     hod: UserCheck,
+//   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-light to-accent p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-light to-accent p-4 bg-sky-100">
       <Card className="w-full max-w-md shadow-2xl border-0">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center">
-            <GraduationCap className="w-8 h-8 text-primary-foreground" />
+            <GraduationCap className="w-12 h-12 text-primary mx-auto" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+            <CardTitle className="text-2xl font-bold text-primary">
               Attendance Pro
             </CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -60,7 +60,7 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-11"
+               
               />
             </div>
             <div className="space-y-2">
@@ -72,7 +72,7 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-11"
+                
               />
             </div>
             <div className="space-y-2">
@@ -105,7 +105,7 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
             </div>
             <Button 
               type="submit" 
-              className="w-full h-11 bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary transition-all duration-300"
+              className="w-full h-11 hover:bg-sky-600"
             >
               Sign In
             </Button>
