@@ -5,10 +5,11 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { ArrowLeft, Shield } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 interface AdminSignupProps {
-    onBack:()=> void;
+    
     onSignup:(data: {
         name:string;
         email:string;
@@ -17,13 +18,14 @@ interface AdminSignupProps {
     }) => void;
 }
 
-const AdminSignup = ({onBack, onSignup }: AdminSignupProps) => {
+const AdminSignup = ({ onSignup }: AdminSignupProps) => {
     const [formData, setFormData ] = useState({
         name:"",
         email:"",
         password:"",
         branch:""
     });
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,10 +33,10 @@ const AdminSignup = ({onBack, onSignup }: AdminSignupProps) => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-cenetr justify-center p-4 ">
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 ">
             <Card className="w-full max-w-md">
                 <CardHeader className="space-y-1">
-                <Button variant="ghost" onClick={onBack} className="w-fit p-2">
+                <Button variant="ghost" onClick={()=>navigate("/")} className="w-fit p-3 rounded-full hover:bg-sky-100">
                     <ArrowLeft className="h-4 w-4" />
                 </Button>
                 <div className="flex items-center justify-center mb-2">

@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage";
 import StudentSignup from "./components/auth/StudentSignup";
 import FacultySignup from "./components/auth/FacultySignup";
 import AdminSignup from "./components/auth/AdminSignup";
+import LoginForm from "./components/auth/LoginForm";
 
 function App(){
   return(
@@ -12,9 +13,10 @@ function App(){
    
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/studentsignup" element={<StudentSignup onBack={() => {}} onSignup={() => {}} />} />
+        <Route path="/studentsignup" element={<StudentSignup onSignup={() => {}} />} />
         <Route path="/facultysignup" element={<FacultySignup onBack={() => {}} onSignup={() => {}} />} />
-        <Route path="/adminsignup" element={<AdminSignup onBack={() =>{}} onSignup={() => {}} /> } />
+        <Route path="/adminsignup" element={<AdminSignup onSignup={() => {}} /> } />
+        <Route path="/loginform" element={<LoginForm onLogin={()=> {}} selectedRule={()=>{}}/>} />
       </Routes>
 
     </BrowserRouter>

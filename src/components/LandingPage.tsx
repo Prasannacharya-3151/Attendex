@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import {GraduationCap, Users, Shield, ArrowRight } from "lucide-react";
@@ -7,6 +7,7 @@ import {GraduationCap, Users, Shield, ArrowRight } from "lucide-react";
 const LandingPage: React.FC = () => {
 //   const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleRoleSelect = (role: string) => {
     setSelectedRole(role);
@@ -18,7 +19,6 @@ const LandingPage: React.FC = () => {
       return;
     }
    
-    // navigate(`/signup?role=${selectedRole}`);
   };
 
   return (
@@ -93,7 +93,7 @@ const LandingPage: React.FC = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" className="w-full hover:bg-sky-100">
+              <Button onClick={()=>navigate("/adminsignup")} variant="outline" className="w-full hover:bg-sky-100">
                 Admin Login
               </Button>
             </CardContent>

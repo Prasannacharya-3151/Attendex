@@ -38,8 +38,7 @@ const FacultySignup = ({onBack, onSignup}:FacultySignupProps)=>{
                     <Button variant="ghost" onClick={onBack} className="w-fit p-3 rounded-full hover:bg-sky-100">
                         <ArrowLeft className="h-4 w-4" />
                     </Button>
-                    <div className="flex items-center justify-center mb-2">
-                        <Users className="h-8 w-8 text-primary" />
+                    <div className="flex items-center justify-center mb-2"><Users className="h-8 w-8 text-primary" />
                     </div>
                     <CardTitle className="text-2xl font-bold text-center">Faculty Signup</CardTitle>
                     <CardDescription className="text-center">

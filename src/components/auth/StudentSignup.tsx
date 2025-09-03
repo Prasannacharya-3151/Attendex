@@ -5,11 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ArrowLeft, GraduationCap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 
 interface StudentSignupProps {
-    onBack:()=>void;
+    
     onSignup:(data: {
         usn:string;
         name:string;
@@ -23,7 +24,7 @@ interface StudentSignupProps {
 
 
 
-const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
+const StudentSignup = ({onSignup}: StudentSignupProps) => {
     const [formData, setFromData] = useState({
         usn:"",
         name:"",
@@ -33,6 +34,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
         year:""
 
     });
+    const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent)=>{
         e.preventDefault();
@@ -40,10 +42,10 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-50">
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4">
            <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
-                <Button variant="ghost" onClick={onBack} className="w-fit p-3 rounded-full hover:bg-sky-100">
+                <Button variant="ghost" onClick={()=>navigate("/")} className="w-fit p-3 rounded-full hover:bg-sky-100">
                     <ArrowLeft className="h-4 w-4" />
                 </Button>
                 <div className="flex items-center justify-center mb-2">
