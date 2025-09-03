@@ -43,7 +43,7 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
         <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-50">
            <Card className="w-full max-w-md">
             <CardHeader className="space-y-1">
-                <Button variant="ghost" onClick={onBack} className="w-fit p-2">
+                <Button variant="ghost" onClick={onBack} className="w-fit p-3 rounded-full hover:bg-sky-100">
                     <ArrowLeft className="h-4 w-4" />
                 </Button>
                 <CardTitle className="text-2xl font-bold text-center">Student Signup</CardTitle>
