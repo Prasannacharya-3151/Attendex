@@ -4,7 +4,7 @@ import { Card, CardHeader,  CardTitle,  CardDescription, CardContent, } from "..
 import { Input } from "../ui/input";;
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft,Users } from "lucide-react";
 
 interface FacultySignupProps {
     onBack:()=>void;
@@ -32,12 +32,15 @@ const FacultySignup = ({onBack, onSignup}:FacultySignupProps)=>{
     };
 
     return(
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-50">
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-100">
             <Card className="w-full max-w-md">
                 <CardHeader className="space-y-1">
                     <Button variant="ghost" onClick={onBack} className="w-fit p-3 rounded-full hover:bg-sky-100">
                         <ArrowLeft className="h-4 w-4" />
                     </Button>
+                    <div className="flex items-center justify-center mb-2">
+                        <Users className="h-8 w-8 text-primary" />
+                    </div>
                     <CardTitle className="text-2xl font-bold text-center">Faculty Signup</CardTitle>
                     <CardDescription className="text-center">
                         Create your faculty account
@@ -114,7 +117,7 @@ const FacultySignup = ({onBack, onSignup}:FacultySignupProps)=>{
                             </Select>
                         </div>
 
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full  hover:bg-sky-600">
                             Create Faculty Account 
                         </Button>
 

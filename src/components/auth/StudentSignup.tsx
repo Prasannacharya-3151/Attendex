@@ -4,7 +4,7 @@ import { Card, CardHeader,  CardTitle,  CardDescription, CardContent, } from "..
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, GraduationCap } from "lucide-react";
 
 
 
@@ -46,6 +46,9 @@ const StudentSignup = ({ onBack, onSignup}: StudentSignupProps) => {
                 <Button variant="ghost" onClick={onBack} className="w-fit p-3 rounded-full hover:bg-sky-100">
                     <ArrowLeft className="h-4 w-4" />
                 </Button>
+                <div className="flex items-center justify-center mb-2">
+                    <GraduationCap className="h-8 w-8 text-primary" />
+                </div>
                 <CardTitle className="text-2xl font-bold text-center">Student Signup</CardTitle>
                 <CardDescription className="text-center">
                     Create your student account

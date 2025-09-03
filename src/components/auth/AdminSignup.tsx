@@ -41,7 +41,7 @@ const AdminSignup = ({onBack, onSignup }: AdminSignupProps) => {
                     <Shield className="h-8 w-8 text-primary" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-center">Admin Signup</CardTitle>
-                <CardDescription className="items-center">
+                <CardDescription className="text-center">
                     Create your Admin account
                 </CardDescription>
                 </CardHeader>
@@ -103,12 +103,12 @@ const AdminSignup = ({onBack, onSignup }: AdminSignupProps) => {
 
 
                         <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                            <p className="text-sm text-amber-700">
+                            <p className="text-sm text-amber-800">
                                 <strong>Note:</strong> Admin accounts require approval and are typically restricted to HOD creation only.
                             </p>
                         </div>
 
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full  hover:bg-sky-600">
                             Create Admin Account
                         </Button>
                     </form>
