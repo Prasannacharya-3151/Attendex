@@ -95,6 +95,29 @@ const FacultySignup = ({onBack, onSignup}:FacultySignupProps)=>{
                             />
                         </div>
 
+                        <div className="space-y-2">
+                            <Label htmlFor="departement">Department</Label>
+                            <Select value={formData.department} onValueChange={(value) => setFormData({...formData, department: value })} >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select your department" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="computer Science">Computer Science</SelectItem>
+                                    <SelectItem value="Information Science">Information Science</SelectItem>
+                                    <SelectItem value="Electronics and Communication">Electronics and Communication</SelectItem>
+                                    <SelectItem value="Electrical and Electronics">Electrical and Electronics</SelectItem>
+                                    <SelectItem value="Mechanical">Mechanical</SelectItem>
+                                    <SelectItem value="Civil">Civil</SelectItem>
+                                    <SelectItem value="AIML">AIML</SelectItem>
+                                    <SelectItem value="Agricultural Engineering">Agricultural Engineering</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <Button type="submit" className="w-full">
+                            Create Faculty Account 
+                        </Button>
+
 
                     </form>
                 </CardContent>
