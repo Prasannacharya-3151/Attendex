@@ -58,7 +58,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
       case "absent":
         return <UserX className="w-4 h-4 text-absent" />;
       case "late":
-        return <Clock className="w-4 h-4 text-warning" />;
+        return <Clock className="w-4 h-4 text-late" />;
       default:
         return <Users className="w-4 h-4 text-muted-foreground" />;
     }
@@ -71,7 +71,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
       case "absent":
         return <Badge className="bg-absent text-white">Absent</Badge>;
       case "late":
-        return <Badge className="bg-warning text-white">Late</Badge>;
+        return <Badge className="bg-late text-white">Late</Badge>;
       default:
         return <Badge variant="secondary">Not Marked</Badge>;
     }
@@ -89,13 +89,13 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Header */}
+      {/* Header for this page*/}
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 flex items-center justify-center">
-                <BookOpen className="w-5 h-5" />
+                <BookOpen className="w-8 h-8 text-primary" />
               </div>
               <div>
                 <h1 className="text-xl font-semibold text-gray-900">Attendance Pro</h1>
@@ -116,7 +116,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Class Selection and Date */}
+        {/* Class Selection and Date fro user section*/}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card>
             <CardHeader className="pb-3">
@@ -148,7 +148,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal hover:bg-sky-100",
                       !selectedDate && "text-muted-foreground"
                     )}
                   >
@@ -162,7 +162,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
                     selected={selectedDate}
                     onSelect={setSelectedDate}
                     initialFocus
-                    className="p-3 pointer-events-auto"
+                    className="p-3 pointer-events-auto "
                   />
                 </PopoverContent>
               </Popover>
@@ -219,10 +219,10 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Late</CardTitle>
-              <Clock className="h-4 w-4 text-warning" />
+              <Clock className="h-4 w-4 text-late" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-warning">{lateCount}</div>
+              <div className="text-2xl font-bold text-late">{lateCount}</div>
             </CardContent>
           </Card>
         </div>
@@ -282,7 +282,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
                         size="sm"
                         variant={attendance[student.id] === "late" ? "default" : "outline"}
                         onClick={() => updateAttendance(student.id, "late")}
-                        className={attendance[student.id] === "late" ? "bg-warning hover:bg-warning/90" : ""}
+                        className={attendance[student.id] === "late" ? "bg-late hover:bg-late/90" : ""}
                       >
                         Late
                       </Button>
@@ -344,7 +344,7 @@ export function FacultyDashboard({ user, onLogout }: FacultyDashboardProps) {
                         <p className="text-muted-foreground">Absent</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-warning font-medium">{lateCount}</p>
+                        <p className="text-late font-medium">{lateCount}</p>
                         <p className="text-muted-foreground">Late</p>
                       </div>
                     </div>

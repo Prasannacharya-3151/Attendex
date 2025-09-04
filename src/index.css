@@ -145,3 +145,33 @@
     --tw-gradient-to: hsl(var(--primary) / 0.10) var(--tw-gradient-to-position);
   }
 }
+/* =========
+   Attendance status button colors
+   ========= */
+.bg-present {
+  background-color: hsl(var(--present));
+  color: white;
+}
+
+.bg-absent {
+  background-color: hsl(var(--absent));
+  color: white;
+}
+
+.bg-late {
+  background-color: hsl(var(--late)) !important;
+  color: white !important;
+}
+
+/* Optional: hover states */
+.bg-present:hover {
+  background-color: hsl(var(--present) / 0.9);
+}
+
+.bg-absent:hover {
+  background-color: hsl(var(--absent) / 0.9);
+}
+
+.bg-late:hover {
+  background-color: hsl(var(--late) / 0.9) !important;
+}
