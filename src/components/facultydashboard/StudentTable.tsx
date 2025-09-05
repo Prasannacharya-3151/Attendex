@@ -1,23 +1,12 @@
 import { useState } from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "../ui/table";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { type Student } from "../types/students";
 import { Edit, Trash2, Mail, Phone } from "lucide-react";
@@ -58,17 +47,17 @@ export const StudentTable = ({
   };
 
   const getSectionColor = (section: string) => {
-    const colors = {
+    const colors: Record<string, string> = {
       A: "bg-blue-100 text-blue-800",
       B: "bg-green-100 text-green-800",
       C: "bg-purple-100 text-purple-800",
     };
-    return colors[section as keyof typeof colors] || "bg-gray-100 text-gray-800";
+    return colors[section] ?? "bg-gray-100 text-gray-800";
   };
 
   if (students.length === 0) {
-    const activeCriteria = [];
-    if (activeSection && activeSection !== 'ALL') activeCriteria.push(`Section ${activeSection}`);
+    const activeCriteria: string[] = [];
+    if (activeSection && activeSection !== "ALL") activeCriteria.push(`Section ${activeSection}`);
     if (searchTerm) activeCriteria.push(`Search: "${searchTerm}"`);
     if (selectedSubject) activeCriteria.push(`Subject: ${selectedSubject}`);
     if (selectedYear) activeCriteria.push(`Year: ${selectedYear}`);
@@ -79,9 +68,7 @@ export const StudentTable = ({
           <h3 className="text-lg font-medium text-foreground mb-2">No students found</h3>
           {activeCriteria.length > 0 ? (
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                No students match the selected criteria:
-              </p>
+              <p className="text-sm text-muted-foreground">No students match the selected criteria:</p>
               <div className="flex flex-wrap gap-2 justify-center">
                 {activeCriteria.map((criteria, index) => (
                   <Badge key={index} variant="secondary" className="text-xs">
@@ -89,9 +76,7 @@ export const StudentTable = ({
                   </Badge>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-3">
-                Try adjusting your filters or search terms
-              </p>
+              <p className="text-xs text-muted-foreground mt-3">Try adjusting your filters or search terms</p>
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
@@ -179,8 +164,7 @@ export const StudentTable = ({
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete {studentToDelete?.name} ({studentToDelete?.usn}) 
-              from the student list. This action cannot be undone.
+              This will permanently delete {studentToDelete?.name} ({studentToDelete?.usn}) from the student list. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -197,5 +181,3 @@ export const StudentTable = ({
     </>
   );
 };
-
-export default StudentTable;
