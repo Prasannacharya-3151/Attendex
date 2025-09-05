@@ -20,7 +20,7 @@ export const SectionTabs = ({
   return (
     <Tabs value={activeSection} onValueChange={(value) => onSectionChange(value as 'A' | 'B' | 'C' | 'ALL')}>
       <TabsList className="grid w-full grid-cols-4">
-        <TabsTrigger value="ALL" className="flex items-center gap-2">
+        <TabsTrigger value="ALL" className="flex items-center gap-2 ">
           All
           <Badge variant="secondary" className="text-xs">
             {sectionCounts.ALL}

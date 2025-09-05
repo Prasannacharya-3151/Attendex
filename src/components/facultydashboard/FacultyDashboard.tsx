@@ -418,7 +418,7 @@ export const FacultyDashboard = ({ user, onLogout }: FacultyDashboardProps) => {
     subjects: facultyInfo.subjects,
   };
 
-  // Mock students data (empty by default, will be managed by StudentManagement)
+  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [students, setStudents] = useState<Student[]>([]);
 
@@ -476,7 +476,7 @@ export const FacultyDashboard = ({ user, onLogout }: FacultyDashboardProps) => {
       <div className="container mx-auto px-4 py-6">
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="overview">Overviw</TabsTrigger>
             <TabsTrigger value="students">
               <UserPlus className="h-4 w-4 mr-2" />
               Student Management
