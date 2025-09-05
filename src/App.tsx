@@ -6,7 +6,7 @@ import StudentSignup from "./components/auth/StudentSignup";
 import FacultySignup from "./components/auth/FacultySignup";
 import AdminSignup from "./components/auth/AdminSignup";
 import LoginForm from "./components/auth/LoginForm";
-import StudentManagement from "./components/facultydashboard/StudentManagement";
+
 import FacultyDashboard from "./components/facultydashboard/FacultyDashboard";
 
 function App(){
@@ -19,7 +19,7 @@ function App(){
         <Route path="/facultysignup" element={<FacultySignup onBack={() => {}} onSignup={() => {}} />} />
         <Route path="/adminsignup" element={<AdminSignup onSignup={() => {}} /> } />
         <Route path="/loginform" element={<LoginForm onLogin={()=> {}} />} />
-        <Route path="/studentmanagement" element={<StudentManagement faculty={ {id: "", name: "", department: ""}} subjects={[{ code:"", label: ""}]} sections={[ ""]}/>} />
+        
         <Route path="/facultydashboard" element={<FacultyDashboard  user={{ name: "", id: "", department: ""}}  onLogout={() => {}} />}/>
       </Routes>
 
