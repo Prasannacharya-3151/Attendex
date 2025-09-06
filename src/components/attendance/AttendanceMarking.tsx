@@ -144,7 +144,7 @@ export const AttendanceMarking = ({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">Date</label>
               <input
@@ -215,7 +215,7 @@ export const AttendanceMarking = ({
       </Card>
 
       {/* Statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
@@ -291,7 +291,7 @@ export const AttendanceMarking = ({
               {filteredStudents.map((student) => (
                 <div
                   key={student.id}
-                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 border rounded-lg hover:bg-accent/50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div>
@@ -302,7 +302,7 @@ export const AttendanceMarking = ({
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <Button
                       size="sm"
                       variant={attendance[student.id] === 'present' ? 'default' : 'outline'}

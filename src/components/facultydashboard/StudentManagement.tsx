@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../ui/select";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -15,10 +16,10 @@ interface StudentManagementProps {
   classInfo: ClassInfo;
 }
 
+const defaultSubjects = ["Mathematics", "Physics", "Chemistry", "Computer Science"];
+
 const generateMockStudents = (): Student[] => {
   const sections: ("A" | "B" | "C")[] = ["A", "B", "C"];
-  const subjects = ["Mathematics", "Physics", "Chemistry", "Computer Science"];
-  const years = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
   const students: Student[] = [];
 
   sections.forEach((section) => {
@@ -27,10 +28,10 @@ const generateMockStudents = (): Student[] => {
         id: `${section}-${i}`,
         name: `Student ${section}${i.toString().padStart(2, "0")}`,
         usn: `1MS21CS${section}${i.toString().padStart(2, "0")}`,
-        subject: subjects[Math.floor(Math.random() * subjects.length)],
+        subject: defaultSubjects[Math.floor(Math.random() * defaultSubjects.length)],
         section,
-        year: years[Math.floor(Math.random() * years.length)],
-        class: "BE Computer Science",
+        year: ["1st Year", "2nd Year", "3rd Year", "4th Year"][Math.floor(Math.random() * 4)],
+        className: "BE Computer Science", // changed from "class" to "className"
         email: `student${section.toLowerCase()}${i}@college.edu`,
         phone: `987654${section.charCodeAt(0)}${i.toString().padStart(2, "0")}`,
         createdAt: new Date(),
@@ -44,6 +45,7 @@ const generateMockStudents = (): Student[] => {
 };
 
 export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps) => {
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [students, setStudents] = useState<Student[]>(generateMockStudents());
   const [searchTerm, setSearchTerm] = useState("");
   const [activeSection, setActiveSection] = useState<"A" | "B" | "C" | "ALL">("ALL");
@@ -63,8 +65,11 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
     if (activeSection !== "ALL") {
       filtered = filtered.filter((s) => s.section === activeSection);
     }
+    if (selectedSubject) {
+      filtered = filtered.filter((s) => s.subject === selectedSubject);
+    }
     return filtered;
-  }, [students, searchTerm, activeSection]);
+  }, [students, searchTerm, activeSection, selectedSubject]);
 
   const sectionCounts = useMemo(() => {
     const counts = { A: 0, B: 0, C: 0, ALL: students.length };
@@ -82,21 +87,31 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
       updatedAt: new Date(),
     };
     setStudents((prev) => [...prev, newStudent]);
-    toast({ title: "Student Added", description: `${newStudent.name} has been added to section ${newStudent.section}.` });
+    toast({
+      title: "Student Added",
+      description: `${newStudent.name} has been added to section ${newStudent.section}.`,
+    });
   };
 
   const updateStudent = (data: StudentFormData) => {
     if (!editingStudent) return;
     const updated: Student = { ...editingStudent, ...data, updatedAt: new Date() };
     setStudents((prev) => prev.map((s) => (s.id === editingStudent.id ? updated : s)));
-    toast({ title: "Student Updated", description: `${updated.name}'s information has been updated.` });
+    toast({
+      title: "Student Updated",
+      description: `${updated.name}'s information has been updated.`,
+    });
   };
 
   const deleteStudent = (studentId: string) => {
     const student = students.find((s) => s.id === studentId);
     if (!student) return;
     setStudents((prev) => prev.filter((s) => s.id !== studentId));
-    toast({ title: "Student Removed", description: `${student.name} has been removed from the class.`, variant: "destructive" });
+    toast({
+      title: "Student Removed",
+      description: `${student.name} has been removed from the class.`,
+      variant: "destructive",
+    });
   };
 
   const handleAddStudent = () => {
@@ -138,13 +153,15 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Students</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent><div className="text-2xl font-bold">{students.length}</div></CardContent>
+          <CardContent>
+            <div className="text-2xl font-bold">{students.length}</div>
+          </CardContent>
         </Card>
 
         <Card>
@@ -152,7 +169,9 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
             <CardTitle className="text-sm font-medium">Section A</CardTitle>
             <Badge variant="secondary">A</Badge>
           </CardHeader>
-          <CardContent><div className="text-2xl font-bold">{sectionCounts.A}</div></CardContent>
+          <CardContent>
+            <div className="text-2xl font-bold">{sectionCounts.A}</div>
+          </CardContent>
         </Card>
 
         <Card>
@@ -160,7 +179,9 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
             <CardTitle className="text-sm font-medium">Section B</CardTitle>
             <Badge variant="secondary">B</Badge>
           </CardHeader>
-          <CardContent><div className="text-2xl font-bold">{sectionCounts.B}</div></CardContent>
+          <CardContent>
+            <div className="text-2xl font-bold">{sectionCounts.B}</div>
+          </CardContent>
         </Card>
 
         <Card>
@@ -168,24 +189,46 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
             <CardTitle className="text-sm font-medium">Section C</CardTitle>
             <Badge variant="secondary">C</Badge>
           </CardHeader>
-          <CardContent><div className="text-2xl font-bold">{sectionCounts.C}</div></CardContent>
+          <CardContent>
+            <div className="text-2xl font-bold">{sectionCounts.C}</div>
+          </CardContent>
         </Card>
       </div>
 
-      {/* Search + Section filter */}
+      {/* Search + Filters */}
       <Card>
         <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between flex-wrap gap-4">
+            <div className="w-full md:w-auto flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search by name or USN..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 w-full"
               />
             </div>
-            <SectionTabs activeSection={activeSection} onSectionChange={setActiveSection} sectionCounts={sectionCounts} />
+            <div className="w-full md:w-auto flex flex-col sm:flex-row gap-2">
+              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                <SelectTrigger className="w-full sm:w-[200px]">
+                  <SelectValue placeholder="Select subject" />
+                </SelectTrigger>
+                <SelectContent>
+                  {(faculty.subjects?.length ? faculty.subjects : defaultSubjects).map((subject) => (
+                    <SelectItem key={subject} value={subject}>
+                      {subject}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="w-full">
+              <SectionTabs
+                activeSection={activeSection}
+                onSectionChange={setActiveSection}
+                sectionCounts={sectionCounts}
+              />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -193,13 +236,16 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
       {/* Table */}
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
-              <CardTitle>Students {activeSection !== "ALL" && `- Section ${activeSection}`}</CardTitle>
+              <CardTitle>
+                Students {activeSection !== "ALL" && `- Section ${activeSection}`}
+              </CardTitle>
             </div>
             <Badge variant="outline">
-              {filteredStudents.length} student{filteredStudents.length !== 1 ? "s" : ""}
+              {filteredStudents.length} student
+              {filteredStudents.length !== 1 ? "s" : ""}
             </Badge>
           </div>
         </CardHeader>
@@ -221,7 +267,7 @@ export const StudentManagement = ({ faculty, classInfo }: StudentManagementProps
         onCancel={handleFormCancel}
         editingStudent={editingStudent}
         classInfo={classInfo}
-        facultySubjects={faculty.subjects}
+        facultySubjects={faculty.subjects ?? defaultSubjects}
       />
     </div>
   );

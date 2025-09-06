@@ -97,27 +97,41 @@ export const StudentForm = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onCancel}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-full sm:max-w-[500px] max-h-[90vh] overflow-y-auto p-4">
         <DialogHeader>
-          <DialogTitle>{editingStudent ? "Edit Student" : "Add New Student"}</DialogTitle>
+          <DialogTitle className="text-lg sm:text-xl">
+            {editingStudent ? "Edit Student" : "Add New Student"}
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Name & USN */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name *</Label>
-              <Input id="name" value={formData.name} onChange={(e) => handleInputChange("name", e.target.value)} placeholder="Enter student name" />
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="Enter student name"
+              />
               {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="usn">USN *</Label>
-              <Input id="usn" value={formData.usn} onChange={(e) => handleInputChange("usn", e.target.value)} placeholder="1MS21CS001" className="uppercase" />
+              <Input
+                id="usn"
+                value={formData.usn}
+                onChange={(e) => handleInputChange("usn", e.target.value)}
+                placeholder="1MS21CS001"
+                className="uppercase"
+              />
               {errors.usn && <p className="text-sm text-destructive">{errors.usn}</p>}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Subject & Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="subject">Subject *</Label>
               <Select value={formData.subject} onValueChange={(v) => handleInputChange("subject", v)}>
@@ -128,11 +142,10 @@ export const StudentForm = ({
               </Select>
               {errors.subject && <p className="text-sm text-destructive">{errors.subject}</p>}
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="section">Section *</Label>
               <Select value={formData.section} onValueChange={(v: "A" | "B" | "C") => handleInputChange("section", v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder="Select section" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="A">Section A</SelectItem>
                   <SelectItem value="B">Section B</SelectItem>
@@ -142,25 +155,25 @@ export const StudentForm = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Year & Class */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="year">Year</Label>
               <Input id="year" value={formData.year} onChange={(e) => handleInputChange("year", e.target.value)} placeholder="1st Year" />
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="class">Class</Label>
               <Input id="class" value={formData.class} onChange={(e) => handleInputChange("class", e.target.value)} placeholder="BE Computer Science" />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Email & Phone */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="student@college.edu" />
               {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="phone">Phone</Label>
               <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="9876543210" maxLength={10} />
@@ -168,9 +181,12 @@ export const StudentForm = ({
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-4">
-            <Button type="button" variant="outline" onClick={onCancel}>Cancel</Button>
-            <Button type="submit">{editingStudent ? "Update Student" : "Add Student"}</Button>
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
+            <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">Cancel</Button>
+            <Button type="submit" className="w-full sm:w-auto">
+              {editingStudent ? "Update Student" : "Add Student"}
+            </Button>
           </div>
         </form>
       </DialogContent>

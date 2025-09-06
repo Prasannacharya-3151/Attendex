@@ -92,21 +92,21 @@ export const StudentTable = ({
     <>
       <div className="rounded-md border overflow-hidden">
         <div className="overflow-x-auto">
-          <Table>
+          <Table className="min-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>USN</TableHead>
                 <TableHead>Section</TableHead>
                 <TableHead>Subject</TableHead>
-                <TableHead className="hidden md:table-cell">Year</TableHead>
-                <TableHead className="hidden lg:table-cell">Contact</TableHead>
+                <TableHead className="hidden sm:table-cell">Year</TableHead>
+                <TableHead className="hidden md:table-cell">Contact</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {students.map((student) => (
-                <TableRow key={student.id}>
+                <TableRow key={student.id} className="hover:bg-muted/50">
                   <TableCell className="font-medium">{student.name}</TableCell>
                   <TableCell className="font-mono text-sm">{student.usn}</TableCell>
                   <TableCell>
@@ -115,13 +115,13 @@ export const StudentTable = ({
                     </Badge>
                   </TableCell>
                   <TableCell>{student.subject}</TableCell>
-                  <TableCell className="hidden md:table-cell">{student.year}</TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    <div className="flex flex-col gap-1">
+                  <TableCell className="hidden sm:table-cell">{student.year}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <div className="flex flex-col gap-1 max-w-[180px]">
                       {student.email && (
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground truncate">
                           <Mail className="h-3 w-3" />
-                          <span className="truncate max-w-[150px]">{student.email}</span>
+                          <span>{student.email}</span>
                         </div>
                       )}
                       {student.phone && (
