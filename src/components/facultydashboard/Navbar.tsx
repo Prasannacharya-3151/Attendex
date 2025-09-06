@@ -95,6 +95,7 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
       >
         {/* desktop collapse button only */}
         <div className="hidden lg:flex justify-end p-3">
+          
           <Button
             size="icon"
             variant="ghost"

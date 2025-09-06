@@ -62,10 +62,10 @@ export const FacultyDashboard = ({ user, onLogout }: FacultyDashboardProps) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-x-hidden">
         {/* Header */}
-        <header className="border-b bg-card shadow-sm">
-          <div className="px-4 py-4">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+        <header className="">
+          <div className="">
+            <div className="">
+              {/* <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                   <BookOpen className="w-6 h-6 text-primary-foreground" />
                 </div>
@@ -75,7 +75,7 @@ export const FacultyDashboard = ({ user, onLogout }: FacultyDashboardProps) => {
                     Attendance Management System
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* Avatar only (logout removed) */}
               <div className="flex items-center gap-3 sm:gap-4">
@@ -94,7 +94,7 @@ export const FacultyDashboard = ({ user, onLogout }: FacultyDashboardProps) => {
         </header>
 
         {/* Content */}
-        <main className="px-4 py-6 overflow-auto">
+        <main className="px-4 overflow-auto">
           {active === "overview" && (
             <>
               <div className="mb-6">
