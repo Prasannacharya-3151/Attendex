@@ -27,7 +27,7 @@ type TabKey = "overview" | "students" | "attendance" | "reports";
 interface NavbarProps {
   active: TabKey;
   onNavigate: (tab: TabKey) => void;
-  onLogout?: () => void; // optional
+  onLogout?: () => void;
 }
 
 export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
@@ -35,9 +35,13 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  // detect desktop (LG breakpoint ~ 1024px)
   useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 1024;
+      setIsDesktop(desktop);
+      if (desktop) setMobileOpen(false);
+      else setCollapsed(false);
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -52,19 +56,19 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
 
   return (
     <TooltipProvider delayDuration={0}>
-      {/* Top mobile bar -- simple (keeps page header small) */}
-      <div className="lg:hidden p-3 border-b flex justify-between items-center">
-       <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-foreground">Faculty Portal</h1>
-                  <p className="text-sm text-muted-foreground">
-                    Attendance Management System
-                  </p>
-                </div>
-              </div>
+      {/* Mobile top bar */}
+      <div className="lg:hidden p-3 border-b flex justify-between items-center bg-white z-50 relative">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <BookOpen className="w-6 h-6 text-primary-foreground" />
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-foreground">Faculty Portal</h1>
+            <p className="text-sm text-muted-foreground">
+              Attendance Management System
+            </p>
+          </div>
+        </div>
         <Button
           size="icon"
           variant="ghost"
@@ -75,10 +79,9 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
         </Button>
       </div>
 
-      {/* overlay for mobile when open */}
-      {!isDesktop && mobileOpen && (
+      {mobileOpen && !isDesktop && (
         <div
-          className="fixed inset-0 bg-black/40 z-40"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
           onClick={() => setMobileOpen(false)}
           aria-hidden
         />
@@ -86,91 +89,62 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
 
       <motion.aside
         animate={{
-          width: isDesktop ? (collapsed ? 72 : 256) : 256,
+          width: isDesktop ? (collapsed ? 72 : 256) : (mobileOpen ? 256 : 0),
           x: isDesktop ? 0 : (mobileOpen ? 0 : -256),
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className={`fixed left-0 top-0 z-50 bg-white border-r shadow-md flex flex-col  lg:static lg:translate-x-0 rounded-lg`}
+        className="fixed left-0 top-0 h-full z-50 bg-white border-r shadow-md flex flex-col lg:static lg:z-auto lg:translate-x-0 overflow-hidden"
+        style={{ height: isDesktop ? '100vh' : 'auto' }}
         aria-hidden={isDesktop ? false : !mobileOpen}
       >
-        {/* desktop collapse button only */}
-        <div className="hidden lg:flex justify-end p-3">
-           <div className="px-4 py-3 border-b">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-md bg-primary text-white flex items-center justify-center">
-              <BookOpen className="h-6 w-6" />
-            </div>
-
-            {/* show title/subheading when not collapsed (or always on mobile) */}
-            {( !collapsed || !isDesktop ) && (
-              <div className="flex-1">
-                <div className="font-semibold text-sm">Faculty Portal</div>
-                <div className="text-xs text-muted-foreground">Attendance Management System</div>
+        {/* Top Section (Logo, Heading, Subheading, Logout, Chevron) */}
+        <div className="p-3 border-b flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-md bg-primary text-white flex items-center justify-center">
+                <BookOpen className="h-6 w-6" />
               </div>
+              {(!collapsed || !isDesktop || mobileOpen) && (
+                <div>
+                  <div className="font-semibold text-sm">Faculty Portal</div>
+                  <div className="text-xs text-muted-foreground">
+                    Attendance Management System
+                  </div>
+                </div>
+              )}
+            </div>
+            {isDesktop && (
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => setCollapsed((c) => !c)}
+                className="h-8 w-8"
+                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              >
+                {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-5 w-5" />}
+              </Button>
             )}
           </div>
 
-          {/* Logout (inside sidebar, visible when expanded or on mobile) */}
-          {( !collapsed || !isDesktop ) && (
-            <div className="mt-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => { onLogout?.(); if (!isDesktop) setMobileOpen(false); }}
-                className="flex items-center gap-2"
-              >
-                <LogOutIcon className="h-4 w-4" />
-                Logout
-              </Button>
-            </div>
+          {/* Logout inside top section */}
+          {(!collapsed || !isDesktop || mobileOpen) && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                onLogout?.();
+                if (!isDesktop) setMobileOpen(false);
+              }}
+              className="flex items-center gap-2 w-full"
+            >
+              <LogOutIcon className="h-4 w-4" />
+              Logout
+            </Button>
           )}
         </div>
-          
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => setCollapsed((c) => !c)}
-            className="h-8 w-8"
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-          </Button>
-        </div>
-
-        {/* Sidebar header: Logo, Title, Subheading, Logout */}
-        {/* <div className="px-4 py-3 border-b">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-md bg-primary text-white flex items-center justify-center">
-              <BookOpen className="h-6 w-6" />
-            </div>
-
-            {/* show title/subheading when not collapsed (or always on mobile) */}
-            {( !collapsed || !isDesktop ) && (
-              <div className="flex-1">
-                <div className="font-semibold text-sm">Faculty Portal</div>
-                <div className="text-xs text-muted-foreground">Attendance Management System</div>
-              </div>
-            )}
-          </div>
-
-          {/* Logout (inside sidebar, visible when expanded or on mobile) */}
-          {( !collapsed || !isDesktop ) && (
-            <div className="mt-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => { onLogout?.(); if (!isDesktop) setMobileOpen(false); }}
-                className="flex items-center gap-2"
-              >
-                <LogOutIcon className="h-4 w-4" />
-                Logout
-              </Button>
-            </div>
-          )}
-        </div> */}
 
         {/* Navigation items */}
-        <nav className="px-2 py-4 space-y-1">
+        <nav className="px-2 py-4 space-y-1 flex-1">
           {items.map((item) => {
             const isActive = active === item.key;
             const content = (
@@ -184,15 +158,13 @@ export const Navbar = ({ active, onNavigate, onLogout }: NavbarProps) => {
                   ${isActive ? "bg-primary text-primary-foreground" : "text-gray-700 hover:bg-sky-100"}`}
               >
                 {item.icon}
-                {/* show label when not collapsed (desktop) or always on mobile */}
-                {(!collapsed || !isDesktop) && (
+                {(!collapsed || !isDesktop || mobileOpen) && (
                   <span className="truncate text-sm">{item.name}</span>
                 )}
               </button>
             );
 
-            // when collapsed on desktop, wrap in tooltip
-            return collapsed && isDesktop ? (
+            return collapsed && isDesktop && !mobileOpen ? (
               <Tooltip key={item.key}>
                 <TooltipTrigger asChild>{content}</TooltipTrigger>
                 <TooltipContent side="right">{item.name}</TooltipContent>
