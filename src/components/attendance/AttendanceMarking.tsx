@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-// import { Checkbox } from "../ui/checkbox";
-import { type Student } from "../types/students";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { Student } from "../types/student";
 import { useToast } from "../../hooks/use-toast";
 import { Calendar, Users, BookOpen, Save, RotateCcw } from "lucide-react";
 
@@ -90,11 +90,16 @@ export const AttendanceMarking = ({
     onAttendanceSubmit(attendanceRecords);
 
     const presentCount = attendanceRecords.filter(record => record.status === 'present').length;
+    const lateCount = attendanceRecords.filter(record => record.status === 'late').length;
     const totalCount = attendanceRecords.length;
+    
+    // Calculate VTU percentage (minimum 85% required for VTU Engineering)
+    const attendancePercentage = totalCount > 0 ? ((presentCount + lateCount) / totalCount * 100) : 0;
+    const vtuStatus = attendancePercentage >= 85 ? "Meets VTU Requirements ✓" : "Below VTU Requirements ⚠️";
 
     toast({
       title: "Attendance Submitted",
-      description: `Attendance recorded for ${presentCount}/${totalCount} students in ${selectedSubject}.`,
+      description: `Attendance recorded for ${presentCount + lateCount}/${totalCount} students. VTU Percentage: ${attendancePercentage.toFixed(1)}% - ${vtuStatus}`,
     });
 
     // Reset attendance after submission
@@ -144,7 +149,7 @@ export const AttendanceMarking = ({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">Date</label>
               <input
@@ -215,7 +220,7 @@ export const AttendanceMarking = ({
       </Card>
 
       {/* Statistics */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
@@ -291,7 +296,7 @@ export const AttendanceMarking = ({
               {filteredStudents.map((student) => (
                 <div
                   key={student.id}
-                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 border rounded-lg hover:bg-accent/50 transition-colors"
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-accent/50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div>
@@ -302,7 +307,7 @@ export const AttendanceMarking = ({
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
                     <Button
                       size="sm"
                       variant={attendance[student.id] === 'present' ? 'default' : 'outline'}
@@ -356,5 +361,3 @@ export const AttendanceMarking = ({
     </div>
   );
 };
-
-export default AttendanceMarking;

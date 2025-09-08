@@ -1,21 +1,33 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { GraduationCap, Users, UserCheck } from "lucide-react";
 
 interface LoginFormProps {
-selectedRole?: string;
-  onLogin: (credentials: { 
-    email: string; 
-    password: string; 
-    role: string 
-}) => void;
+  selectedRole?: string;
+  onLogin: (credentials: {
+    email: string;
+    password: string;
+    role: string;
+  }) => void;
 }
 
-const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
+const LoginForm = ({ onLogin, selectedRole }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(selectedRole || "");
@@ -27,11 +39,11 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
     }
   };
 
-//   const roleIcons = {
-//     student: GraduationCap,
-//     faculty: Users,
-//     hod: UserCheck,
-//   };
+  //   const roleIcons = {
+  //     student: GraduationCap,
+  //     faculty: Users,
+  //     hod: UserCheck,
+  //   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-light to-accent p-4 bg-sky-100">
@@ -60,7 +72,6 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-               
               />
             </div>
             <div className="space-y-2">
@@ -72,7 +83,6 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                
               />
             </div>
             <div className="space-y-2">
@@ -103,16 +113,17 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
                 </SelectContent>
               </Select>
             </div>
-            <Button 
-              type="submit" 
-              className="w-full h-11 hover:bg-sky-600"
-            >
+            <Button type="submit" className="w-full h-11 hover:bg-sky-600">
               Sign In
             </Button>
           </form>
           <div className="mt-6 text-center text-sm text-muted-foreground">
             Don't have an account?{" "}
-            <Button variant="link" className="p-0 h-auto text-primary" onClick={() => window.location.reload()}>
+            <Button
+              variant="link"
+              className="p-0 h-auto text-primary"
+              onClick={() => window.location.reload()}
+            >
               Sign up here
             </Button>
           </div>
@@ -120,5 +131,5 @@ const LoginForm=({ onLogin, selectedRole }: LoginFormProps)=> {
       </Card>
     </div>
   );
-}
+};
 export default LoginForm;

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import {GraduationCap, Users, Shield, ArrowRight } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { GraduationCap, Users, Shield, ArrowRight } from "lucide-react";
 
 const LandingPage: React.FC = () => {
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -18,25 +24,22 @@ const LandingPage: React.FC = () => {
       alert("Please select a role first!");
       return;
     }
-   
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-4 bg-sky-50">
       <div className="w-full max-w-4xl">
-        
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-primary mb-4">
             Attendance Management System
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Streamline attendance tracking for students, faculty, and administrators
+            Streamline attendance tracking for students, faculty, and
+            administrators
           </p>
         </div>
 
-       
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-         
           <Card
             className={`hover:shadow-lg transition-shadow cursor-pointer ${
               selectedRole === "student" ? "border-primary" : ""
@@ -57,7 +60,6 @@ const LandingPage: React.FC = () => {
             </CardContent>
           </Card>
 
-     
           <Card
             className={`hover:shadow-lg transition-shadow cursor-pointer ${
               selectedRole === "faculty" ? "border-primary" : ""
@@ -78,7 +80,6 @@ const LandingPage: React.FC = () => {
             </CardContent>
           </Card>
 
-        
           <Card
             className={`hover:shadow-lg transition-shadow cursor-pointer ${
               selectedRole === "hod" ? "border-primary" : ""
@@ -93,16 +94,23 @@ const LandingPage: React.FC = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={()=>navigate("/adminsignup")} variant="outline" className="w-full hover:bg-sky-100">
+              <Button
+                onClick={() => navigate("/adminsignup")}
+                variant="outline"
+                className="w-full hover:bg-sky-100"
+              >
                 Admin Login
               </Button>
             </CardContent>
           </Card>
         </div>
 
-       
         <div className="text-center">
-          <Button onClick={handleGetStarted} size="lg" className="px-8 hover:bg-sky-600">
+          <Button
+            onClick={handleGetStarted}
+            size="lg"
+            className="px-8 hover:bg-sky-600"
+          >
             Get Started
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
