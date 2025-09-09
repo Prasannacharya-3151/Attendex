@@ -35,7 +35,7 @@ function App() {
             />
           }
         >
-          <Route index element={<FacultyOverview user={{ name: "John Doe", id: "F123", department: "CSE" }} />} />
+          <Route path="overview" element={<FacultyOverview user={{ name: "John Doe", id: "F123", department: "CSE" }} />} />
           <Route
             path="students"
             element={

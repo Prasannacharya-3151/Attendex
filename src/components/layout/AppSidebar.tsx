@@ -24,7 +24,7 @@ interface AppSidebarProps {
 }
 
 const navigationItems = [
-  { title: "Overview", url: "/facultydashboard", icon: BarChart3 },
+  { title: "Overview", url: "/facultydashboard/overview", icon: BarChart3 },
   { title: "Student Management", url: "/facultydashboard/students", icon: Users },
   { title: "Mark Attendance", url: "/facultydashboard/attendance", icon: ClipboardList },
   { title: "Reports", url: "/facultydashboard/reports", icon: BarChart3 },
@@ -52,7 +52,7 @@ export function AppSidebar({ user, onLogout }: AppSidebarProps) {
     >
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-primary font-semibold text-lg px-4 py-2">
+          <SidebarGroupLabel className="text-primary font-semibold text-xl px-4 py-2">
             {state !== "collapsed" && "Faculty Portal"}
           </SidebarGroupLabel>
           
